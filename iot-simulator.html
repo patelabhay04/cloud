@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smartwatch Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="center">
+<div class="card">
+<h2>IoT Smartwatch Simulator</h2>
+<input id="patientName" placeholder="Patient Name">
+<input id="hr" placeholder="Heart Rate">
+<input id="spo2" placeholder="SpO₂">
+<input id="temp" placeholder="Temperature">
+
+<button onclick="send()">Send To Cloud</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyAt-EWEfo4yLAqYnKs3HxIcL4ALg_y4RLo",
+  databaseURL: "https://smarthealthcare-iot-default-rtdb.firebaseio.com",
+  projectId: "smarthealthcare-iot"
+});
+
+function send(){
+ let name = document.getElementById("patientName").value.trim();
+
+ if(name==""){
+   alert("Enter patient name");
+   return;
+ }
+
+ firebase.database().ref("patients/" + name).set({
+   heartRate: Number(hr.value),
+   spo2: Number(spo2.value),
+   temp: Number(temp.value)
+ });
+ alert("Data sent for " + name);
+}
+
+</script>
+</body>
+</html>
+

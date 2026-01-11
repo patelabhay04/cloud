@@ -1,0 +1,11 @@
+body{font-family:Arial;margin:0;background:#eef5ff}
+.center{display:flex;justify-content:center;align-items:center;height:100vh}
+.card{background:#fff;padding:25px;border-radius:12px;width:300px;text-align:center}
+input,button{width:90%;padding:10px;margin:10px}
+.navbar{background:#1f3c88;color:white;padding:15px;font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:20px}
+.vital{background:white;padding:20px;border-radius:12px;font-size:18px}
+.alert{background:#ffd6d6}
+table{width:90%;margin:30px auto;background:white}
+th,td{padding:12px;text-align:center}
+.btn{display:block;width:200px;margin:20px auto;background:#1f3c88;color:white;text-align:center;padding:12px;border-radius:8px;text-decoration:none}

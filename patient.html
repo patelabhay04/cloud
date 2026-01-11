@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Patient Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">Patient Live Dashboard</div>
+
+<div class="grid">
+<div class="vital">❤️ Heart Rate<br><span id="hr">--</span></div>
+<div class="vital">🫁 SpO₂<br><span id="spo2">--</span></div>
+<div class="vital">🌡 Temperature<br><span id="temp">--</span></div>
+<div class="vital alert" id="status">Status Normal</div>
+</div>
+
+<a class="btn" href="appointment.html">Request Appointment</a>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<audio id="patientAlarm" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyAt-EWEfo4yLAqYnKs3HxIcL4ALg_y4RLo",
+  databaseURL: "https://smarthealthcare-iot-default-rtdb.firebaseio.com",
+  projectId: "smarthealthcare-iot"
+});
+
+firebase.database().ref("patients/parth").on("value", s=>{
+ let d = s.val();
+ hr.innerHTML = d.heartRate + " BPM";
+ spo2.innerHTML = d.spo2 + "%";
+ temp.innerHTML = d.temp + "°C";
+
+ if(d.heartRate > 120 || d.spo2 < 92 || d.temp > 38){
+   status.innerHTML = "🚨 EMERGENCY – Doctor Notified";
+   status.style.color = "red";
+   document.getElementById("patientAlarm").play();
+   document.body.style.background = "#ffe5e5";
+ } 
+ else {
+   status.innerHTML = "Status Normal";
+   status.style.color = "green";
+   document.body.style.background = "#eef5ff";
+ }
+});
+</script>
+
+</body>
+</html>
